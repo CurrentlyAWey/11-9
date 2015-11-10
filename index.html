@@ -4,42 +4,48 @@
     <title>Simple Map</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
-    <style>
-      html, body, #map-canvas {
-        height: 100%;
-        margin: 0px;
-        padding: 0px
-      }
-    </style>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <script src="http://cooper-union-maps-proxy.herokuapp.com/js/draw.js"></script>
     <script>
 
-      //set up the google map
-      var map;
+      $(document).ready(function(){
 
-      //create a function that runs when the page is ready
-      var initialize = function() {
-        //set some default options
         var mapOptions = {
-          zoom: 8, //very close
-          center: new google.maps.LatLng(33.0197, -96.6992) //Plano, TX
+          zoom: 13,
+          center: new google.maps.LatLng(33.019, -96.6992)
         };
 
-        //create a new map, and have it populate the #map-canvas html element
-        var map = new google.maps.Map(document.getElementById('map-canvas'),
-            mapOptions);
+        var positions = [
+          {
+		'title': 'Oak Point Nature Preserve',
+            'map': new google.maps.LatLng(33.05, -96.67),
+		'link':'https://www.plano.gov/Facilities/Facility/Details/23' ,
+            'html':'<a href =https://www.plano.gov/Facilities/Facility/Details/23 ><img src=http://media-cdn.tripadvisor.com/media/photo-s/02/b7/45/b1/oak-point-park-nature.jpg /> </a>'
+          },
+          {
+            'title':'Pecan Hollow Golf Course',
+            'map':new google.maps.LatLng(33.015, -96.64),
+            'link':'http://www.pecanhollowgc.com/',
+            'html':'<a href =http://www.pecanhollowgc.com/facilities/ ><img src=http://www.pecanhollowgc.com/golf/emailer2020/img/pecanhollowgc/photo.JPG /> </a>'
+          },
+        ];
 
-      }
+        draw('map', mapOptions, positions);
+      });
 
-      //add the map to the page, when the page is ready
-      google.maps.event.addDomListener(window, 'load', initialize);
+      // google.maps.event.addDomListener(window, 'load', initialize);
 
-
-    
     </script>
+        <style>
+      #map {
+        height:800px;
+        width:800px;
+      }
+    </style>
   </head>
   <body>
-    <div id="map-canvas"></div>
+    <div id="map"></div>
   </body>
 </html>
 
